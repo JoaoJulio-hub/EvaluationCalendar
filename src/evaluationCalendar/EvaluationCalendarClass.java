@@ -1,11 +1,9 @@
 package evaluationCalendar;
 
-import Course.Course;
-import Person.Person;
+import Course.*;
+import Person.*;
 import dataStructures.*;
-import evaluation.Project;
-import evaluation.Test;
-
+import evaluation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -16,6 +14,11 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     ArrayClass<Person> people = new ArrayClass<Person>();
     ArrayClass<Course> courses = new ArrayClass<Course>();
 
+
+    @Override
+    public boolean isEmpty() {
+        return people.size() == 0;
+    }
 
     @Override
     public boolean personExists(String name) {
@@ -133,8 +136,8 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public Iterator<Person> listEveryone() {
-        return null;
+    public Iterator<Person> listAll() {
+        return people.iterator();
     }
 
     @Override

@@ -1,4 +1,6 @@
 package Person;
 
-public class StudentClass {
+public class StudentClass extends AbstractPerson implements Student  {
+
 }
+

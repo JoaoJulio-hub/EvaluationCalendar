@@ -1,4 +1,5 @@
 package Person;
 
-public interface Professor {
+public interface Professor extends Person{
+
 }
