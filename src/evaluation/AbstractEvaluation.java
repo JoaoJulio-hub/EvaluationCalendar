@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import static java.time.LocalDate.of;
 
-public class AbstractEvaluation implements Evaluation{
+public abstract class AbstractEvaluation implements Evaluation{
 
     private int year, month, day;
     private String course;
