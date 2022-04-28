@@ -1,8 +1,14 @@
+/*
+
+ */
 package evaluationCalendar;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import dataStructures.Iterator;
+import Person.*;
+import Course.*;
+import evaluation.*;
 
 public interface EvaluationCalendar {
 
@@ -57,11 +63,11 @@ public interface EvaluationCalendar {
     boolean studentIsEnroledToCourse(String name, String course);
 
     /*
-     * Checks if a deadline with the given name already exists
-     * @param deadlineName
-     * @return true if deadline exists, false if otherwise
+     * Checks if a project with the given name already exists
+     * @param projectName
+     * @return true if project exists, false if otherwise
      */
-    boolean deadlineExists(String deadlineName);
+    boolean deadlineExists(String projectName);
 
     /*
      * Checks if there is any person with a test in the same day
@@ -246,5 +252,7 @@ public interface EvaluationCalendar {
      * Returns an iterator for the Students with the most consecutive days with a test or a project;
      * @param numbOfStudents
      * @pre numbOfStudents > 0
+     * @return the iterator
      */
-    Iterator<Student> listMostStressedStudents(int numbOfStudents);
+    Iterator<StudentClass> listMostStressedStudents(int numbOfStudents);
+}
