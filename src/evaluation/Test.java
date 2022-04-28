@@ -9,6 +9,4 @@ public interface Test extends Evaluation{
     int getMinutes();
 
     int getDuration();
-
-    LocalDateTime createTime(int hour, int minutes, int duration);
 }

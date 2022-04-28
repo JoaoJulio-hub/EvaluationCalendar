@@ -1,3 +1,6 @@
+/*
+
+ */
 package evaluationCalendar;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -249,6 +252,7 @@ public interface EvaluationCalendar {
      * Returns an iterator for the Students with the most consecutive days with a test or a project;
      * @param numbOfStudents
      * @pre numbOfStudents > 0
+     * @return the iterator
      */
-    Iterator<Student> listMostStressedStudents(int numbOfStudents);
+    Iterator<StudentClass> listMostStressedStudents(int numbOfStudents);
 }
