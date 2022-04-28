@@ -2,7 +2,6 @@ package Course;
 import Person.*;
 import dataStructures.*;
 import evaluation.*;
-import java.time.*;
 
 import dataStructures.Array;
 
@@ -63,25 +62,30 @@ public class CourseClass implements Course{
 
     /**
      * Add test to the course
-     *
-     * @param date
-     * @param time
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
      * @param duration
      * @param name
      */
     @Override
-    public void addTest(LocalDate date, LocalDateTime time, int duration, String name) {
-        evaluations.insertLast(new Test(date, time, duration, name));
+    public void addTest(int year, int month, int day, int hour,
+                        int minute, int duration, String name) {
+        evaluations.insertLast(new TestClass(year, month, day,
+                hour, minute, duration, name));
     }
 
     /**
      * Add project to the course
-     *
-     * @param date
+     * @param year
+     * @param month
+     * @param day
      * @param name
      */
     @Override
-    public void addProject(LocalDate date, String name) {
-        evaluations.insertLast(new ProjectClass(date, name));
+    public void addProject(int year, int month, int day, String name) {
+        evaluations.insertLast(new ProjectClass(year, month, day, name));
     }
 }

@@ -1,35 +1,26 @@
 package evaluation;
-
-import java.time.LocalDate;
-
-import static java.time.LocalDate.of;
+import java.time.*;
 
 public abstract class AbstractEvaluation implements Evaluation{
 
     private int year, month, day;
-    private String course;
+    private String name;
 
-    protected AbstractEvaluation(String course, int year, int month, int day){
-
+    protected AbstractEvaluation(int year, int month, int day, String name) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.name = name;
     }
 
     @Override
-    public int getYear() {
-        return year;
+    public LocalDate getDate() {
+        return LocalDate.of(year, month, day);
     }
 
     @Override
-    public int getMonth() {
-        return month;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public int getDay() {
-        return day;
-    }
-
-    @Override
-    public String getCourse() {
-        return course;
-    }
 }

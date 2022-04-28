@@ -1,38 +1,24 @@
 package evaluation;
 
-public class TestClass implements Test extends AbstractEvaluationClass{
-    @Override
-    public int getYear() {
-        return 0;
+import java.time.*;
+
+public class TestClass extends AbstractEvaluation implements Test {
+    int hour, minute, duration;
+
+    public TestClass(int year, int month, int day, String name, int hour, int minute, int duration) {
+        super(year, month, day, name);
+        this.hour = hour;
+        this.minute = minute;
+        this.duration = duration;
     }
 
     @Override
-    public int getMonth() {
-        return 0;
+    public LocalTime getStartingHour() {
+        return LocalTime.of(hour, minute);
     }
 
     @Override
-    public int getDay() {
-        return 0;
-    }
-
-    @Override
-    public String getCourse() {
-        return null;
-    }
-
-    @Override
-    public int getHour() {
-        return 0;
-    }
-
-    @Override
-    public int getMinutes() {
-        return 0;
-    }
-
-    @Override
-    public int getDuration() {
-        return 0;
+    public LocalTime getEndingHour() {
+        return getStartingHour().plusHours(duration);
     }
 }

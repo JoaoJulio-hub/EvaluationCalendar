@@ -1,4 +1,5 @@
 package evaluation;
 
-public interface Test extends Evaluation{
+public interface Test extends Evaluation {
+
 }

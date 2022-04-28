@@ -31,17 +31,23 @@ public interface Course {
 
     /**
      * Add test to the course
-     * @param date
-     * @param time
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
      * @param duration
      * @param name
      */
-    void addTest(LocalDate date, LocalDateTime time, int duration, String name);
+    void addTest(int year, int month, int day, int hour,
+                 int minute, int duration, String name);
 
     /**
      * Add project to the course
-     * @param date
+     * @param year
+     * @param month
+     * @param day
      * @param name
      */
-    void addProject(LocalDate date, String name);
+    void addProject(int year, int month, int day, String name);
 }

@@ -1,26 +1,10 @@
 package evaluation;
-
+import java.time.LocalDate
 public interface Evaluation {
 
-    /*
-    returns the year of the date of the evaluation
-     */
-    int getYear();
+    LocalDate getDate();
 
-    /*
-    returns the month of the date of the evaluation
-     */
-    int getMonth();
-
-    /*
-    returns the day of the date of the evaluation
-     */
-    int getDay();
-
-    /*
-    returns the name of the course
-     */
-    String getCourse();
+    String getName();
 
 
 }
