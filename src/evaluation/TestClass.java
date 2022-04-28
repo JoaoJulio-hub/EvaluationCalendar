@@ -1,11 +1,28 @@
+/**
+ * Class that implements the test interface
+ * Created by Joao Julio && Rodrigo Freitas
+ */
 package evaluation;
 
 import java.time.*;
 
 public class TestClass extends AbstractEvaluation implements Test {
-    int hour, minute, duration;
+    /**
+     * Constants
+     */
+    final int hour, minute, duration;
 
-    public TestClass(int year, int month, int day, String name, int hour, int minute, int duration) {
+    /**
+     * Constructor of the class
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
+     * @param duration
+     * @param name
+     */
+    public TestClass(int year, int month, int day, int hour, int minute, int duration, String name) {
         super(year, month, day, name);
         this.hour = hour;
         this.minute = minute;

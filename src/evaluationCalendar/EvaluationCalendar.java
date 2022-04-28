@@ -260,5 +260,5 @@ public interface EvaluationCalendar {
      * @pre numbOfStudents > 0
      * @return the iterator
      */
-    Iterator<StudentClass> listMostStressedStudents(int numbOfStudents);
+    Iterator<Student> listMostStressedStudents(int numbOfStudents);
 }

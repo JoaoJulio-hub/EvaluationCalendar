@@ -1,11 +1,25 @@
+/**
+ * Abstract Class for any evaluation
+ * Created by Joao Julio && Rodrigo Freitas
+ */
 package evaluation;
 import java.time.*;
 
 public abstract class AbstractEvaluation implements Evaluation{
 
-    private int year, month, day;
-    private String name;
+    /**
+     * Constants
+     */
+    private final int year, month, day;
+    private final String name;
 
+    /**
+     * Constructor of the class
+     * @param year
+     * @param month
+     * @param day
+     * @param name
+     */
     protected AbstractEvaluation(int year, int month, int day, String name) {
         this.year = year;
         this.month = month;
