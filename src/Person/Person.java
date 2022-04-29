@@ -1,23 +1,30 @@
+/**
+ * Person interface, represented by his name
+ * Created by Joao Julio && Rodrigo Freitas
+ */
 package Person;
 import dataStructures.*;
 import Course.*;
 
-/**
- * Person, represented by his name
- */
+
 public interface Person {
 
     /**
      * Returns person name
      * @return - person name
      */
-    public String getName();
+    String getName();
 
     /**
      * Returns an iterator
-     * @return
+     * @return - the iterator
      */
-    public Iterator<Course> coursesIterator();
+    Iterator<Course> coursesIterator();
 
+    /**
+     * Returns the number of courses a person participates in
+     * @return - the number of courses
+     */
+    int numberOfCourses();
 
 }

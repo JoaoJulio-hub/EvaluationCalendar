@@ -15,6 +15,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     ArrayClass<Course> courses = new ArrayClass<Course>();
 
 
+
     @Override
     public boolean isEmpty() {
         return people.size() == 0;
@@ -22,7 +23,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean personExists(String name) {
-        return people.searchForward(new Person(0, name));
+        return people.searchForward(new ProfessorClass(name));
     }
 
     @Override
@@ -57,7 +58,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean deadlineExists(String projectName) {
-        return courses.searchIndexOf();
+        return courses.searchForward(new ProjectClass(0,0,0, projectName));
     }
 
     @Override
@@ -131,7 +132,8 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public void scheduleTest(int year, int month, int day, int hour, int minute, int duration, String course, String test) {
+    public void scheduleTest(int year, int month, int day, int hour, int minute,
+                             int duration, String course, String test) {
 
     }
 

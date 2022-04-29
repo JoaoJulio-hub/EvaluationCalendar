@@ -60,7 +60,9 @@ public class Main {
             System.out.println(HEADER_LIST_ACCOUNTS);
             while(it.hasNext()){
                 Person person = it.next();
-                if(person instanceof Student){
+                if(person instanceof Professor) {
+                    System.out.println(person.getName() + " " + "(" + person.numberOfCourses() + ")");
+                } else {
 
                 }
             }
