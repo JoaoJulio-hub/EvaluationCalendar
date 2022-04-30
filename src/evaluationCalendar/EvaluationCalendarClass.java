@@ -4,16 +4,15 @@ import Course.*;
 import Person.*;
 import dataStructures.*;
 import evaluation.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 
 
 public class EvaluationCalendarClass implements EvaluationCalendar {
 
     ArrayClass<Person> people = new ArrayClass<Person>();
     ArrayClass<Course> courses = new ArrayClass<Course>();
-
 
 
     @Override
@@ -43,7 +42,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean courseExists(String name) {
-        return false;
+       return courses.searchForward(new CourseClass(name));
     }
 
     @Override
@@ -58,7 +57,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean deadlineExists(String projectName) {
-        return courses.searchForward(new ProjectClass(0,0,0, projectName));
+        return false;
     }
 
     @Override
@@ -155,6 +154,16 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     @Override
     public Iterator<Person.Person> intersection(int numbOfCourses, String course) {
         return null;
+    }
+
+    @Override
+    public Array<Person> IntersectCourses(String c1, String c2) {
+        return getCourseByName(c1).IntersectCourses(getCourseByName(c2));
+    }
+
+    @Override
+    public Course getCourseByName(String course) {
+        return courses.get(courses.searchIndexOf(new CourseClass(course)));
     }
 
     @Override

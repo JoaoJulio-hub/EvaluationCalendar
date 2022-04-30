@@ -1,4 +1,5 @@
 import Person.Person;
+import evaluation.Evaluation;
 import evaluationCalendar.*;
 import dataStructures.*;
 import Person.*;
@@ -12,6 +13,7 @@ public class Main {
      * User commands.
      */
     private static final String PEOPLE = "PEOPLE";
+    private static final String COURSE = "COURSE";
     private static final String EXIT = "EXIT";
 
     /**
@@ -40,6 +42,10 @@ public class Main {
             switch (c) {
                 case PEOPLE:
                     listPeople(ec);
+                    break;
+                case COURSE:
+                    addCourse(in, ec);
+
 
             }
             c = in.next().toUpperCase();
@@ -59,13 +65,18 @@ public class Main {
             Iterator<Person> it =  ec.listAll();
             System.out.println(HEADER_LIST_ACCOUNTS);
             while(it.hasNext()){
-                Person person = it.next();
-                if(person instanceof Professor) {
-                    System.out.println(person.getName() + " " + "(" + person.numberOfCourses() + ")");
+                Person p = it.next();
+                if(p instanceof Student) {
+                    System.out.println("[" + ((Student) p).getId() + "] " + p.getName() + " (" + p.numberOfCourses() + ")");
                 } else {
-
+                    System.out.println(p.getName() + " (" + p.numberOfCourses() + ")");
                 }
             }
         }
+    }
+
+    private static void addCourse(Scanner in, EvaluationCalendar ec){
+        String course = in.nextLine();
+
     }
 }

@@ -5,6 +5,8 @@ import evaluation.*;
 
 import dataStructures.Array;
 
+import java.util.Objects;
+
 /**
  * Creates a Course with a given name
  */
@@ -18,6 +20,10 @@ public class CourseClass implements Course{
      * Array of students and professors
      */
     private Array<Person> people;
+
+    /**
+     * Array of evaluations
+     */
     private Array<Evaluation> evaluations;
 
     /**
@@ -87,5 +93,51 @@ public class CourseClass implements Course{
     @Override
     public void addProject(int year, int month, int day, String name) {
         evaluations.insertLast(new ProjectClass(year, month, day, name));
+    }
+
+    @Override
+    public String getName(){
+        return name;
+    }
+
+    @Override
+    public int getSize(){
+        return people.size();
+    }
+
+    /**
+     * equals method
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Course))
+            return false;
+        Course other = (Course) obj;
+        return Objects.equals(name, other.getName());
+    }
+
+    @Override
+    public boolean hasPerson(String name){
+        return people.searchForward(new ProfessorClass(name));
+    }
+
+    @Override
+    public Array<Person> IntersectCourses(Course c2) {
+        Array<Person> intersection = people;
+        Iterator<Person> it = personIterator();
+        while(it.hasNext()){
+            Person p = it.next();
+            if(!c2.hasPerson(p.getName())) {
+                int pos = people.searchIndexOf(new ProfessorClass(p.getName()));
+                intersection.removeAt(pos);
+            }
+        }
+        return intersection;
     }
 }

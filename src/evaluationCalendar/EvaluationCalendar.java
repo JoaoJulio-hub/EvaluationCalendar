@@ -5,6 +5,7 @@ package evaluationCalendar;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import dataStructures.Array;
 import dataStructures.Iterator;
 import Person.*;
 import Course.*;
@@ -221,6 +222,21 @@ public interface EvaluationCalendar {
      * @return the iterator
      */
     Iterator<Person> intersection(int numbOfCourses, String course);
+
+    /**
+     *
+     * @param c1
+     * @param c2
+     * @return
+     */
+    Array<Person> IntersectCourses(String c1, String c2);
+
+    /**
+     * Gets the course with the given name
+     * @param course
+     * @return a course
+     */
+    Course getCourseByName(String course);
 
     /**
      * Returns an iterator for the deadlines of a course

@@ -50,4 +50,12 @@ public interface Course {
      * @param name
      */
     void addProject(int year, int month, int day, String name);
+
+    String getName();
+
+    int getSize();
+
+    boolean hasPerson(String name);
+
+    Array<Person> IntersectCourses(Course c2);
 }
