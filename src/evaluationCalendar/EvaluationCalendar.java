@@ -245,6 +245,8 @@ public interface EvaluationCalendar {
      */
     Array<Person> intersectCourses(String c1, String c2);
 
+    Array<Person> IntersectCourses(String c1, String c2);
+
     /**
      * Gets the course with the given name
      * @param course
@@ -289,4 +291,6 @@ public interface EvaluationCalendar {
      * @return the iterator
      */
     Iterator<Student> mostStressedStudents();
+
+    Iterator<Student> listMostStressedStudents(int numbOfStudents);
 }

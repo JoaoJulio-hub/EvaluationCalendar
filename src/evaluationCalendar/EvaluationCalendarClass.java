@@ -16,6 +16,16 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
 
     @Override
+    public Person getPerson(String name) {
+        people.get(courses.searchIndexOf(new ProjectClass(name)));
+    }
+
+    @Override
+    public boolean isStudent(String name) {
+        return false;
+    }
+
+    @Override
     public boolean isEmpty() {
         return people.size() == 0;
     }
@@ -27,11 +37,16 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean studentExists(String name) {
-        return false;
+        return people.searchForward(new StudentClass(0, name));
     }
 
     @Override
     public boolean professorExists(String name) {
+        return false;
+    }
+
+    @Override
+    public boolean studentIdExists(int id) {
         return false;
     }
 
@@ -47,6 +62,11 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean professorIsAssigned(String name) {
+        return false;
+    }
+
+    @Override
+    public boolean studentIsEnrolledToCourse(String name, String course) {
         return false;
     }
 
@@ -156,8 +176,9 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return null;
     }
 
+
     @Override
-    public Array<Person> IntersectCourses(String c1, String c2) {
+    public Array<Person> intersectCourses(String c1, String c2) {
         return getCourseByName(c1).IntersectCourses(getCourseByName(c2));
     }
 
@@ -183,6 +204,11 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public Iterator<Test> personalTests(String name) {
+        return null;
+    }
+
+    @Override
+    public Iterator<Person.Student> mostStressedStudents() {
         return null;
     }
 
