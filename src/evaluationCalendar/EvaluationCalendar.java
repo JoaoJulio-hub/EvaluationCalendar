@@ -4,14 +4,28 @@
 package evaluationCalendar;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import dataStructures.Array;
-import dataStructures.Iterator;
+import dataStructures.*;
 import Person.*;
 import Course.*;
 import evaluation.*;
 
 public interface EvaluationCalendar {
+
+    /**
+     * Return the person with the given name
+     * @param name
+     * * @pre personExists
+     * @return person with the given name
+     */
+    Person getPerson(String name);
+
+    /**
+     * Checks if a person is a student
+     * @param name
+     * @pre personExists()
+     * @return true if person is a student, false otherwise
+     */
+    boolean isStudent(String name);
 
     /**
      * Checks if there is no person in the system
@@ -22,71 +36,71 @@ public interface EvaluationCalendar {
     /**
      * Checks if a person with the given name is already in the system
      * @param name
-     * @return true if person exists, false if otherwise
+     * @return true if person exists, false otherwise
      */
     boolean personExists(String name);
 
     /**
      * Checks if a student with the given name is already in the system
      * @param name
-     * @return true if the student exists, false if otherwise
+     * @return true if the student exists, false otherwise
      */
     boolean studentExists(String name);
 
     /**
      * Checks if a professor with the given name is already in the system
      * @param name
-     * @return true if the professor exists, false if otherwise
+     * @return true if the professor exists, false otherwise
      */
     boolean professorExists(String name);
 
     /**
      * Checks if a student number is already taken
-     * @param number
-     * @return true if number is taken, false if otherwise
+     * @param id
+     * @return true if number is taken, false otherwise
      */
-    boolean studentNumberTaken(int number);
+    boolean studentIdExists(int id);
 
     /**
      * Checks if a course with the given name already exists
      * @param name
-     * @return true if course exists, false if otherwise
+     * @return true if course exists, false otherwise
      */
     boolean courseExists(String name);
 
     /**
      * Checks if a given professor is already assigned to a course
      * @param name
-     * @return true if professor is already assigned to a course, false if otherwise
+     * @return true if professor is already assigned to a course, false otherwise
      */
     boolean professorIsAssigned(String name);
 
     /**
-     * Checks if a student is already enroled in a given course
+     * Checks if a student is already enrolled in a given course
      * @param name
      * @param course
-     * @return true if the student is enroled in the course, false if otherwise
+     * @return true if the student is enrolled in the course, false otherwise
      */
-    boolean studentIsEnroledToCourse(String name, String course);
+    boolean studentIsEnrolledToCourse(String name, String course);
 
     /**
      * Checks if a project with the given name already exists
      * @param projectName
-     * @return true if project exists, false if otherwise
+     * @return true if project exists, false  otherwise
      */
     boolean deadlineExists(String projectName);
 
     /**
      * Checks if there is any person with a test in the same day
      * @param date
-     * @return true if there is any conflict, false if otherwise
+     * @return true if there is any conflict, false otherwise
      */
     boolean dateConflict(LocalDate date);
 
     /**
      * Checks if there is any person with a test in a time that intersects with the given time
      * @param time
-     * @return true if there is any conflict, false if otherwise
+     * @return true if there is any conflict, false otherwise
      */
     boolean timeConflict(LocalDateTime time);
 
@@ -95,7 +109,7 @@ public interface EvaluationCalendar {
      * @param course
      * @param date
      * @param time
-     * @return true if the course doesn't have any test scheduled for any intersecting time, false if otherwise
+     * @return true if the course doesn't have any test scheduled for any intersecting time, false otherwise
      */
     boolean validTestTime(String course, LocalDate date, LocalDateTime time);
 
@@ -137,12 +151,12 @@ public interface EvaluationCalendar {
 
     /**
      * Adds a student to the system
-     * @param number
+     * @param id
      * @param name
      * @pre !personExists(name)
-     * @pre !studentNumberTaken(number)
+     * @pre !studentIdExists(id)
      */
-    void addStudent(int number, String name);
+    void addStudent(int id, String name);
 
     /**
      * Adds a course to the system
@@ -272,9 +286,7 @@ public interface EvaluationCalendar {
 
     /**
      * Returns an iterator for the Students with the most consecutive days with a test or a project;
-     * @param numbOfStudents
-     * @pre numbOfStudents > 0
      * @return the iterator
      */
-    Iterator<Student> listMostStressedStudents(int numbOfStudents);
+    Iterator<Student> mostStressedStudents();
 }
