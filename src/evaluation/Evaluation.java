@@ -4,7 +4,7 @@
  */
 package evaluation;
 import java.time.LocalDate;
-public interface Evaluation extends Comparable<Evaluation> {
+public interface Evaluation {
 
     /**
      * Method to get the date of an evaluation

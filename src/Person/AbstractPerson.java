@@ -1,11 +1,11 @@
-/**
- * Abstract class for person
- * Created by Joao Julio && Rodrigo Freitas
- */
 package Person;
 import dataStructures.*;
 import Course.Course;
 
+/**
+ * Abstract class for person
+ * Created by Joao Julio && Rodrigo Freitas
+ */
 public abstract class AbstractPerson implements Person{
 
     /**

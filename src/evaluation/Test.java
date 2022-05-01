@@ -5,7 +5,7 @@
 package evaluation;
 import java.time.LocalTime;
 
-public interface Test extends Evaluation {
+public interface Test extends Evaluation, Comparable<Test> {
 
     /**
      * Gets the starting hour of a test

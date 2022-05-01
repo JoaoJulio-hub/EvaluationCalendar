@@ -76,7 +76,7 @@ public class CourseClass implements Course{
     public void addTest(int year, int month, int day, int hour,
                         int minute, int duration, String name) {
         evaluations.insertLast(new TestClass(year, month, day,
-                hour, minute, duration, name));
+                hour, minute, duration, this.name, name));
     }
 
     /**
@@ -88,7 +88,7 @@ public class CourseClass implements Course{
      */
     @Override
     public void addProject(int year, int month, int day, String name) {
-        evaluations.insertLast(new ProjectClass(year, month, day, name));
+        evaluations.insertLast(new ProjectClass(year, month, day, this.name, name));
     }
 
     @Override
@@ -218,20 +218,6 @@ public class CourseClass implements Course{
             }
         }
         return counter;
-    }
-
-    @Override
-    public Array<Person> IntersectCourses(Course c2) {
-        Array<Person> intersection = people;
-        Iterator<Person> it = personIterator();
-        while(it.hasNext()){
-            Person p = it.next();
-            if(!c2.hasPerson(p.getName())) {
-                int pos = people.searchIndexOf(new ProfessorClass(p.getName()));
-                intersection.removeAt(pos);
-            }
-        }
-        return intersection;
     }
 
     @Override

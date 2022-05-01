@@ -19,10 +19,12 @@ public class TestClass extends AbstractEvaluation implements Test {
      * @param hour
      * @param minute
      * @param duration
+     * @param courseName
      * @param name
      */
-    public TestClass(int year, int month, int day, int hour, int minute, int duration, String name) {
-        super(year, month, day, name);
+    public TestClass(int year, int month, int day, int hour,
+                     int minute, int duration, String courseName, String name) {
+        super(year, month, day, courseName, name);
         this.hour = hour;
         this.minute = minute;
         this.duration = duration;
@@ -38,4 +40,20 @@ public class TestClass extends AbstractEvaluation implements Test {
         return getStartingHour().plusHours(duration);
     }
 
+    @Override
+    public int compareTo(Test other) {
+        if (this.getDate().compareTo(other.getDate()) < 0) {
+            return 1;
+        } else if (this.getDate().compareTo(other.getDate()) > 0) {
+            return -1;
+        } else if (this.getDate().compareTo(other.getDate()) == 0 &&
+                this.getStartingHour().compareTo(other.getStartingHour()) < 0) {
+            return 1;
+        } else if (this.getDate().compareTo(other.getDate()) == 0 &&
+                this.getStartingHour().compareTo(other.getStartingHour()) > 0) {
+            return -1;
+        } else {
+            return this.getCourseName().compareTo(other.getCourseName());
+        }
+    }
 }
