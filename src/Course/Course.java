@@ -18,10 +18,10 @@ public interface Course {
     void addPerson(Person obj);
 
     /**
-     * Returns an iterator of deadlines (all tests + projects)
-     * @return deadlines iterator
+     * Returns an iterator of all evaluations (all tests + projects)
+     * @return iterator of all evaluations
      */
-    Iterator<Evaluation> deadlinesIterator();
+    Iterator<Evaluation> evaluationsIterator();
 
     /**
      * Returns an iterator of all students + teachers in the course
@@ -51,11 +51,61 @@ public interface Course {
      */
     void addProject(int year, int month, int day, String name);
 
+    /**
+     * Get name of the course
+     * @return name
+     */
     String getName();
 
+    /**
+     * Get number of people in the course
+     * @return number of people
+     */
     int getSize();
 
     boolean hasPerson(String name);
 
+    /**
+     * Check if a professor with a given name exists
+     * @param name
+     * @return true if the professor exists, false otherwise
+     */
+    boolean hasProfessor(String name);
+
+    /**
+     * Check if a student with a given name exists
+     * @param name
+     * @return true if the student exists, false otherwise
+     */
+    boolean hasStudent(String name);
+
+    /**
+     * Get number of scheduled tests
+     * @return number of tests
+     */
+    public int getNumberTests();
+
+    /**
+     * Get number of scheduled projects
+     * @return number of projects
+     */
+    public int getNumberProjects();
+
+    /**
+     * Get number of professors in the course
+     * @return number of professors
+     */
+    int getNumberProfessors();
+
+    /**
+     * Get number of students in the course
+     * @return number of students
+     */
+    int getNumberStudents();
+
     Array<Person> IntersectCourses(Course c2);
+
+    Iterator<Project> projectsIterator();
+
+    Iterator<Test> testIterator();
 }

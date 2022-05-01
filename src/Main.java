@@ -79,4 +79,13 @@ public class Main {
         String course = in.nextLine();
 
     }
+
+    private static void stress(Scanner in, EvaluationCalendar ec) {
+        int n = in.nextInt();
+        Iterator<Person> it = ec.mostStressedStudents();
+        int i = 0;
+        while(it.hasNext() && i != n) {
+            System.out.println(it.next());
+        }
+    }
 }

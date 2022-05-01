@@ -8,6 +8,10 @@ import Course.*;
 
 
 public interface Person {
+    /**
+     * Add course to the Array
+     */
+    void addCourse(Course c);
 
     /**
      * Returns person name

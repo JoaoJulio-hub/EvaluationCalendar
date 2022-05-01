@@ -1,10 +1,7 @@
 package Course;
 import Person.*;
-import dataStructures.*;
 import evaluation.*;
-
-import dataStructures.Array;
-
+import dataStructures.*;
 import java.util.Objects;
 
 /**
@@ -47,12 +44,11 @@ public class CourseClass implements Course{
     }
 
     /**
-     * Returns an iterator of deadlines (all tests + projects)
-     *
-     * @return deadlines iterator
+     * Returns an iterator of all evaluations (all tests + projects)
+     * @return iterator of all evaluations
      */
     @Override
-    public Iterator<Evaluation> deadlinesIterator() {
+    public Iterator<Evaluation> evaluationsIterator() {
         return evaluations.iterator();
     }
 
@@ -127,6 +123,103 @@ public class CourseClass implements Course{
         return people.searchForward(new ProfessorClass(name));
     }
 
+    public Person getPerson(String name) {
+        int pos = people.searchIndexOf(new ProfessorClass(name));
+        return people.get(pos);
+    }
+
+    /**
+     * Check if a professor with a given name exists
+     * @param name
+     * @return true if the professor exists, false otherwise
+     */
+    @Override
+    public boolean hasProfessor(String name) {
+        return getPerson(name) instanceof Professor;
+    }
+
+    /**
+     * Check if a student with a given name exists
+     * @param name
+     * @return true if the student exists, false otherwise
+     */
+    @Override
+    public boolean hasStudent(String name) {
+        return getPerson(name) instanceof Student;
+    }
+
+    /**
+     * Get number of scheduled tests
+     *
+     * @return number of tests
+     */
+    @Override
+    public int getNumberTests() {
+        Iterator<Evaluation> it = evaluations.iterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            Evaluation e = it.next();
+            if (e instanceof Test) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    /**
+     * Get number of scheduled projects
+     *
+     * @return number of projects
+     */
+    @Override
+    public int getNumberProjects() {
+        Iterator<Evaluation> it = evaluations.iterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            Evaluation e = it.next();
+            if (e instanceof Project) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    /**
+     * Get number of professors in the course
+     *
+     * @return number of professors
+     */
+    @Override
+    public int getNumberProfessors() {
+        Iterator<Person> it = people.iterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            Person p = it.next();
+            if (p instanceof Professor) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    /**
+     * Get number of students in the course
+     *
+     * @return number of students
+     */
+    @Override
+    public int getNumberStudents() {
+        Iterator<Person> it = people.iterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            Person p = it.next();
+            if (p instanceof Student) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     @Override
     public Array<Person> IntersectCourses(Course c2) {
         Array<Person> intersection = people;
@@ -139,5 +232,33 @@ public class CourseClass implements Course{
             }
         }
         return intersection;
+    }
+
+    @Override
+    public Iterator<Project> projectsIterator() {
+        Array<Project> projects = new ArrayClass<Project>();
+        Iterator<Evaluation> it = evaluationsIterator();
+        while(it.hasNext()){
+            Evaluation e = it.next();
+            if(e instanceof Project) {
+                projects.insertLast((Project) e);
+            }
+        }
+        projects.sort();
+        return projects.iterator();
+    }
+
+    @Override
+    public Iterator<Test> testIterator() {
+        Array<Test> tests = new ArrayClass<Test>();
+        Iterator<Evaluation> it = evaluationsIterator();
+        while(it.hasNext()){
+            Evaluation e = it.next();
+            if(e instanceof Test) {
+                tests.insertLast((Test) e);
+            }
+        }
+        tests.sort();
+        return tests.iterator();
     }
 }

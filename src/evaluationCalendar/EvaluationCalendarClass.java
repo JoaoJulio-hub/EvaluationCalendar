@@ -4,7 +4,6 @@ import Course.*;
 import Person.*;
 import dataStructures.*;
 import evaluation.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -14,6 +13,30 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     ArrayClass<Person> people = new ArrayClass<Person>();
     ArrayClass<Course> courses = new ArrayClass<Course>();
 
+
+    /**
+     * Return the person with the given name
+     *
+     * @param name
+     * @pre personExists
+     * @return person with the given name
+     */
+    @Override
+    public Person getPerson(String name) {
+        int pos = people.searchIndexOf(new ProfessorClass(name));
+        return people.get(pos);
+    }
+
+    /**
+     * Checks if a person is a student
+     * @param name
+     * @return true if person is a student, false otherwise
+     * @pre personExists()
+     */
+    @Override
+    public boolean isStudent(String name) {
+        return getPerson(name) instanceof Student;
+    }
 
     @Override
     public boolean isEmpty() {
@@ -27,16 +50,25 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean studentExists(String name) {
-        return false;
+        return personExists(name) && isStudent(name);
     }
 
     @Override
     public boolean professorExists(String name) {
-        return false;
+        return personExists(name) && !isStudent(name);
     }
 
     @Override
-    public boolean studentNumberTaken(int number) {
+    public boolean studentIdExists(int id) {
+        Iterator<Person> it = people.iterator();
+        while (it.hasNext()) {
+            Person p = it.next();
+            if (p instanceof Student) {
+                if (((Student) p).getId() == id) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -51,7 +83,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public boolean studentIsEnroledToCourse(String name, String course) {
+    public boolean studentIsEnrolledToCourse(String name, String course) {
         return false;
     }
 
@@ -102,22 +134,22 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public void addProfessor(String name) {
-
+        people.insertLast(new ProfessorClass(name));
     }
 
     @Override
-    public void addStudent(int number, String name) {
-
+    public void addStudent(int id, String name) {
+        people.insertLast(new StudentClass(id, name));
     }
 
     @Override
     public void addCourse(String name) {
-
+        courses.insertLast(new CourseClass(name));
     }
 
     @Override
     public void assignProfessor(String name, String course) {
-
+        getCourseByName(course).addPerson(new ProfessorClass(name));
     }
 
     @Override
@@ -143,16 +175,16 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public Iterator<Course> listCourses() {
-        return null;
+        return courses.iterator();
     }
 
     @Override
-    public Iterator<Person.Person> listCourseRoster(String courseName) {
-        return null;
+    public Iterator<Person> listCourseRoster(String courseName) {
+        return getCourseByName(courseName).personIterator();
     }
 
     @Override
-    public Iterator<Person.Person> intersection(int numbOfCourses, String course) {
+    public Iterator<Person> intersection(int numbOfCourses, String course) {
         return null;
     }
 
@@ -186,9 +218,16 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return null;
     }
 
-    @Override
-    public Iterator<Student> listMostStressedStudents(int numbOfStudents) {
-        return null;
+    public Iterator<Student> mostStressedStudents() {
+        Array<Student> tmp = new ArrayClass<Student>();
+        Iterator<Person> it = people.iterator();
+        while(it.hasNext()) {
+            Person p = it.next();
+            if (p instanceof Professor) {
+                tmp.insertLast((Student) p);
+            }
+        }
+        return tmp.iterator();
     }
 
 }

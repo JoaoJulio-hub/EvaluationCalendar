@@ -3,7 +3,6 @@
  * Created by Joao Julio && Rodrigo Freitas
  */
 package evaluation;
-
 import java.time.*;
 
 public class TestClass extends AbstractEvaluation implements Test {
@@ -38,4 +37,5 @@ public class TestClass extends AbstractEvaluation implements Test {
     public LocalTime getEndingHour() {
         return getStartingHour().plusHours(duration);
     }
+
 }

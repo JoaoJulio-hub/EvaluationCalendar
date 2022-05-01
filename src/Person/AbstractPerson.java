@@ -3,30 +3,38 @@
  * Created by Joao Julio && Rodrigo Freitas
  */
 package Person;
-
+import dataStructures.*;
 import Course.Course;
-import dataStructures.ArrayClass;
-import dataStructures.Iterator;
 
 public abstract class AbstractPerson implements Person{
 
     /**
      * Name of the person
      */
-    String name;
+    private String name;
 
     /**
      * Array containing every course a person is participating in
      */
-    ArrayClass<Course> courses = new ArrayClass<>();
-
+    private ArrayClass<Course> courses;
     /**
      * Constructor
      * @param name
      */
     protected AbstractPerson(String name){
         this.name = name;
+        this.courses = new ArrayClass<Course>();
     }
+    /**
+     * Add course to the Array
+     *
+     * @param c
+     */
+    @Override
+    public void addCourse(Course c) {
+        courses.insertLast(c);
+    }
+
 
 
     @Override
@@ -44,3 +52,4 @@ public abstract class AbstractPerson implements Person{
         return courses.size();
     }
 }
+
