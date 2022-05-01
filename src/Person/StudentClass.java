@@ -25,5 +25,6 @@ public class StudentClass extends AbstractPerson implements Student  {
     public int getId() {
         return id;
     }
+
 }
 

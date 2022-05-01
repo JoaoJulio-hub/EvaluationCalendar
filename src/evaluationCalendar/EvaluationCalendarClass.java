@@ -36,7 +36,14 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public boolean studentNumberTaken(int number) {
+    public boolean studentNumberTaken(int id) {
+        Iterator<Person> it = listAll();
+        while(it.hasNext()){
+            Person p = it.next();
+            if(p instanceof Student && ((Student) p).getId() == id){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -102,7 +109,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public void addProfessor(String name) {
-
+        people.insertLast(new ProfessorClass(name));
     }
 
     @Override
@@ -111,8 +118,8 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public void addCourse(String name) {
-
+    public void addCourse(String course) {
+        courses.insertLast(new CourseClass(course));
     }
 
     @Override
@@ -157,7 +164,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public Array<Person> IntersectCourses(String c1, String c2) {
+    public Array<Person> intersectCourses(String c1, String c2) {
         return getCourseByName(c1).IntersectCourses(getCourseByName(c2));
     }
 

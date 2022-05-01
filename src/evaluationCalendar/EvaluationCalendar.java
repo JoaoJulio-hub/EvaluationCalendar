@@ -229,7 +229,7 @@ public interface EvaluationCalendar {
      * @param c2
      * @return
      */
-    Array<Person> IntersectCourses(String c1, String c2);
+    Array<Person> intersectCourses(String c1, String c2);
 
     /**
      * Gets the course with the given name

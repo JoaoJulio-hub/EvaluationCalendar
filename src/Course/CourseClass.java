@@ -52,7 +52,7 @@ public class CourseClass implements Course{
      * @return deadlines iterator
      */
     @Override
-    public Iterator<Evaluation> deadlinesIterator() {
+    public Iterator<Evaluation> evaluationsIterator() {
         return evaluations.iterator();
     }
 
