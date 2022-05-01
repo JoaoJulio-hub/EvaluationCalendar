@@ -4,4 +4,4 @@
  */
 package evaluation;
 
-public interface Project extends Evaluation {}
+public interface Project extends Evaluation, Comparable<Project> {}

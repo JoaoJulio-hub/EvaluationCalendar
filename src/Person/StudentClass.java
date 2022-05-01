@@ -112,19 +112,18 @@ public class StudentClass extends AbstractPerson implements Student  {
 
     @Override
     public int compareTo(Student other) {
-        if (this.getStraightDays() > other.getStraightDays() || // if number of days
-                (this.getStraightDays() == other.getStraightDays()
-                        && this.getNumberOfEvaluations() > other.getNumberOfEvaluations())) {
-            return 1;
+        if (this.getStraightDays() != other.getStraightDays()) {
+            return this.getStraightDays() - other.getStraightDays();
+        } if (this.getStraightDays() == other.getStraightDays()
+                && this.getNumberOfEvaluations() != other.getNumberOfEvaluations()) {
+            return this.getNumberOfEvaluations() - other.getNumberOfEvaluations();
         } else if(this.getStraightDays() == other.getStraightDays()
-                && this.getNumberOfEvaluations() == other.getNumberOfEvaluations())  {
-            if (this.numberOfCourses() > other.numberOfCourses()) {
-                return 1;
-            } else if (this.getId() > other.getId()) {
-                return 1;
-            }
+                && this.getNumberOfEvaluations() == other.getNumberOfEvaluations()
+                    && this.numberOfCourses() != other.numberOfCourses()) {
+            return this.numberOfCourses() - other.numberOfCourses();
+        } else {
+            return this.getId() - other.getId();
         }
-        return -1;
     }
 }
 

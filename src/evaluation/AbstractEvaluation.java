@@ -15,13 +15,13 @@ public abstract class AbstractEvaluation implements Evaluation{
 
     /**
      * Constructor of the class
+     *
      * @param year
      * @param month
      * @param day
      * @param name
-     * @param courseName
      */
-    protected AbstractEvaluation(String courseName, int year, int month, int day, String name) {
+    protected AbstractEvaluation(int year, int month, int day, String courseName, String name) {
         this.courseName = courseName;
         this.year = year;
         this.month = month;
@@ -77,11 +77,6 @@ public abstract class AbstractEvaluation implements Evaluation{
     @Override
     public String getCourseName() {
         return courseName;
-    }
-
-    @Override
-    public int compareTo(Evaluation other) {
-        return this.getDate().compareTo(other.getDate());
     }
 }
 
