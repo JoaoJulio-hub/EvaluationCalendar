@@ -5,6 +5,7 @@
 package Person;
 import dataStructures.*;
 import Course.*;
+import evaluation.Project;
 
 
 public interface Person {
@@ -31,4 +32,5 @@ public interface Person {
      */
     int numberOfCourses();
 
+    Iterator<Project> personalProjectsIterator();
 }

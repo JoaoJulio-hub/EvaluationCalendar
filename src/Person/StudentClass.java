@@ -47,6 +47,7 @@ public class StudentClass extends AbstractPerson implements Student  {
      * Get a sorted iterator with all the tests of a student (falta fazer o compareTo)
      * @return sorted iterator with all the tests
      */
+    @Override
     public Iterator<Test> personalTestIterator() {
         Array<Test> tests = new ArrayClass<Test>();
         Iterator<Course> itCourse = coursesIterator();
@@ -64,26 +65,7 @@ public class StudentClass extends AbstractPerson implements Student  {
         return tests.iterator();
     }
 
-    /**
-     * Get an array with all the evaluations of a student (falta fazer o compareTo)
-     * @return an array with all the evaluations
-     */
-    private Iterator<Project> personalProjectsIterator() {
-        Array<Project> projects = new ArrayClass<Project>();
-        Iterator<Course> itCourse = coursesIterator();
-        while(itCourse.hasNext()) {
-            Course c = itCourse.next();
-            Iterator<Evaluation> itEval = c.evaluationsIterator();
-            while(itEval.hasNext()) {
-                Evaluation e = itEval.next();
-                if(e instanceof Project) {
-                    projects.insertLast((Project) e);
-                }
-            }
-        }
-        projects.sort();
-        return projects.iterator();
-    }
+
 
     @Override
     public int getId() {

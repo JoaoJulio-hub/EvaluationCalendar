@@ -106,4 +106,6 @@ public interface Course {
     Iterator<Project> projectsIterator();
 
     Iterator<Test> testIterator();
+
+    Person getByPos(int pos);
 }

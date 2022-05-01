@@ -247,4 +247,9 @@ public class CourseClass implements Course{
         tests.sort();
         return tests.iterator();
     }
+
+    @Override
+    public Person getByPos(int pos){
+        return people.get(pos);
+    }
 }

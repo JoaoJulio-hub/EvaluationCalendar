@@ -1,6 +1,8 @@
 package Person;
 import dataStructures.*;
 import Course.Course;
+import evaluation.Evaluation;
+import evaluation.Project;
 
 /**
  * Abstract class for person
@@ -50,6 +52,28 @@ public abstract class AbstractPerson implements Person{
     @Override
     public int numberOfCourses(){
         return courses.size();
+    }
+
+    /**
+     * Get an array with all the evaluations of a student (falta fazer o compareTo)
+     * @return an array with all the evaluations
+     */
+    @Override
+    public Iterator<Project> personalProjectsIterator() {
+        Array<Project> projects = new ArrayClass<Project>();
+        Iterator<Course> itCourse = coursesIterator();
+        while(itCourse.hasNext()) {
+            Course c = itCourse.next();
+            Iterator<Evaluation> itEval = c.evaluationsIterator();
+            while(itEval.hasNext()) {
+                Evaluation e = itEval.next();
+                if(e instanceof Project) {
+                    projects.insertLast((Project) e);
+                }
+            }
+        }
+        projects.sort();
+        return projects.iterator();
     }
 }
 

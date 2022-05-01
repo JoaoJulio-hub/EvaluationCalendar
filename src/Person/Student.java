@@ -4,7 +4,12 @@
  */
 package Person;
 
+import dataStructures.Iterator;
+import evaluation.Test;
+
 public interface Student extends Person, Comparable<Student> {
+
+    Iterator<Test> personalTestIterator();
 
     /**
      * Gets the student id

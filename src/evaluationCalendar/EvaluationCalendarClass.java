@@ -4,6 +4,7 @@ import Course.*;
 import Person.*;
 import dataStructures.*;
 import evaluation.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,8 +19,8 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
      * Return the person with the given name
      *
      * @param name
-     * @pre personExists
      * @return person with the given name
+     * @pre personExists
      */
     @Override
     public Person getPerson(String name) {
@@ -29,6 +30,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     /**
      * Checks if a person is a student
+     *
      * @param name
      * @return true if person is a student, false otherwise
      * @pre personExists()
@@ -39,8 +41,13 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean peopleIsEmpty() {
         return people.size() == 0;
+    }
+
+    @Override
+    public boolean coursesIsEmpty() {
+        return courses.size() == 0;
     }
 
     @Override
@@ -74,22 +81,22 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean courseExists(String name) {
-       return courses.searchForward(new CourseClass(name));
+        return courses.searchForward(new CourseClass(name));
     }
 
     @Override
-    public boolean professorIsAssigned(String name) {
-        return false;
+    public boolean professorIsAssigned(String name, String course) {
+        return getCourseByName(course).hasProfessor(name);
     }
 
     @Override
     public boolean studentIsEnrolledToCourse(String name, String course) {
-        return false;
+        return getCourseByName(course).hasStudent(name);
     }
 
     @Override
     public boolean deadlineExists(String projectName) {
-        return false;
+        return co;
     }
 
     @Override
@@ -153,19 +160,19 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public void enrolToCourse(int numbOfStudents, String course, String name) {
-
+    public void enrolToCourse( String name, String course) {
+        getCourseByName(course).addPerson(getPerson(name));
     }
 
     @Override
     public void newDeadline(String course, int year, int month, int day, String deadlineName) {
-
+        getCourseByName(course).addProject(year, month, day, deadlineName);
     }
 
     @Override
     public void scheduleTest(int year, int month, int day, int hour, int minute,
                              int duration, String course, String test) {
-
+        getCourseByName(course).addTest(year, month, day, hour, minute, duration, test);
     }
 
     @Override
@@ -183,15 +190,6 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return getCourseByName(courseName).personIterator();
     }
 
-    @Override
-    public Iterator<Person> intersection(int numbOfCourses, String course) {
-        return null;
-    }
-
-    @Override
-    public Array<Person> IntersectCourses(String c1, String c2) {
-        return getCourseByName(c1).IntersectCourses(getCourseByName(c2));
-    }
 
     @Override
     public Course getCourseByName(String course) {
@@ -200,28 +198,30 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public Iterator<Project> courseDeadlines(String course) {
-        return null;
+        return getCourseByName(course).projectsIterator();
     }
 
     @Override
     public Iterator<Project> personalDeadlines(String name) {
-        return null;
+        return getPerson(name).personalProjectsIterator();
     }
 
     @Override
     public Iterator<Test> courseTests(String course) {
-        return null;
+        return getCourseByName(course).testIterator();
     }
 
     @Override
     public Iterator<Test> personalTests(String name) {
-        return null;
+        Student student = (Student) getPerson(name);
+        return student.personalTestIterator();
     }
 
+    @Override
     public Iterator<Student> mostStressedStudents() {
         Array<Student> tmp = new ArrayClass<Student>();
         Iterator<Person> it = people.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Person p = it.next();
             if (p instanceof Professor) {
                 tmp.insertLast((Student) p);
@@ -230,4 +230,21 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return tmp.iterator();
     }
 
+    @Override
+    public Array<Person> multiIntersectCourses(Array<Person> persons) {
+        for (int i = 0; i < persons.size(); i++) {
+            Person p = persons.get(i);
+            int repeat = 0;
+            for (int j = 0; j < persons.size(); j++) {
+                if (p.equals(persons.get(j))) {
+                    repeat++;
+                    persons.removeAt(j);
+                }
+            }
+            if (repeat == 0) {
+                persons.removeAt(i);
+            }
+        }
+        return persons;
+    }
 }
