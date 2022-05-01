@@ -103,8 +103,6 @@ public interface Course {
      */
     int getNumberStudents();
 
-    Array<Person> IntersectCourses(Course c2);
-
     Iterator<Project> projectsIterator();
 
     Iterator<Test> testIterator();

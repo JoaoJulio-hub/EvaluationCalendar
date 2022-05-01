@@ -221,20 +221,6 @@ public class CourseClass implements Course{
     }
 
     @Override
-    public Array<Person> IntersectCourses(Course c2) {
-        Array<Person> intersection = people;
-        Iterator<Person> it = personIterator();
-        while(it.hasNext()){
-            Person p = it.next();
-            if(!c2.hasPerson(p.getName())) {
-                int pos = people.searchIndexOf(new ProfessorClass(p.getName()));
-                intersection.removeAt(pos);
-            }
-        }
-        return intersection;
-    }
-
-    @Override
     public Iterator<Project> projectsIterator() {
         Array<Project> projects = new ArrayClass<Project>();
         Iterator<Evaluation> it = evaluationsIterator();

@@ -4,6 +4,7 @@ import Course.*;
 import Person.*;
 import dataStructures.*;
 import evaluation.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,8 +19,8 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
      * Return the person with the given name
      *
      * @param name
-     * @pre personExists
      * @return person with the given name
+     * @pre personExists
      */
     @Override
     public Person getPerson(String name) {
@@ -29,6 +30,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     /**
      * Checks if a person is a student
+     *
      * @param name
      * @return true if person is a student, false otherwise
      * @pre personExists()
@@ -74,7 +76,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean courseExists(String name) {
-       return courses.searchForward(new CourseClass(name));
+        return courses.searchForward(new CourseClass(name));
     }
 
     @Override
@@ -183,15 +185,6 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return getCourseByName(courseName).personIterator();
     }
 
-    @Override
-    public Iterator<Person> intersection(int numbOfCourses, String course) {
-        return null;
-    }
-
-    @Override
-    public Array<Person> IntersectCourses(String c1, String c2) {
-        return getCourseByName(c1).IntersectCourses(getCourseByName(c2));
-    }
 
     @Override
     public Course getCourseByName(String course) {
@@ -218,10 +211,11 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return null;
     }
 
+    @Override
     public Iterator<Student> mostStressedStudents() {
         Array<Student> tmp = new ArrayClass<Student>();
         Iterator<Person> it = people.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Person p = it.next();
             if (p instanceof Professor) {
                 tmp.insertLast((Student) p);
@@ -230,4 +224,21 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         return tmp.iterator();
     }
 
+    @Override
+    public Iterator<Person> multiIntersectCourses(Array<Person> persons) {
+        for (int i = 0; i < persons.size(); i++) {
+            Person p = persons.get(i);
+            int repeat = 0;
+            for (int j = 0; j < persons.size(); j++) {
+                if (p.equals(persons.get(j))) {
+                    repeat++;
+                    persons.removeAt(j);
+                }
+            }
+            if (repeat == 0) {
+                persons.removeAt(i);
+            }
+        }
+        return persons.iterator();
+    }
 }

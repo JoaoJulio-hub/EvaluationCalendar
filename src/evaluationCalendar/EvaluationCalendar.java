@@ -229,23 +229,6 @@ public interface EvaluationCalendar {
     Iterator<Person> listCourseRoster(String courseName);
 
     /**
-     * Returns an iterator with the people that participate in all the given courses
-     * @param numbOfCourses
-     * @param course
-     * @pre numbOfCourses > 1 && courseExists(course)
-     * @return the iterator
-     */
-    Iterator<Person> intersection(int numbOfCourses, String course);
-
-    /**
-     *
-     * @param c1
-     * @param c2
-     * @return
-     */
-    Array<Person> IntersectCourses(String c1, String c2);
-
-    /**
      * Gets the course with the given name
      * @param course
      * @return a course
@@ -289,4 +272,6 @@ public interface EvaluationCalendar {
      * @return the iterator
      */
     Iterator<Student> mostStressedStudents();
+
+    Iterator<Person> multiIntersectCourses(Array<Person> persons);
 }
