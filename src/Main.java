@@ -6,7 +6,12 @@ import dataStructures.*;
 import Person.*;
 import java.awt.*;
 import java.util.Locale;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
 
 public class Main {
 
@@ -15,8 +20,10 @@ public class Main {
      */
     private static final String WRITE_DATE_FORMAT = "dd-MM-yyyy";
     private static final String WRITE_TIME_FORMAT = "HH'h'mm";
-    private static final String WRITE_DEADLINE_MSG = "The deadline for %s is %s.\n";
-    private static final String WRITE_TEST_MSG = "%s is scheduled for %s %s-%s.\n";
+    private static final String WRITE_P_DEADLINE_MSG = "[%s] %s: %s\n";
+    private static final String WRITE_C_DEADLINE_MSG = "%s: %s\n";
+    private static final String WRITE_P_TEST_MSG = "%s %s: %s - %s\n";
+    private static final String WRITE_C_TEST_MSG = "%s %s: %s\n";
 
 
     /**
@@ -165,7 +172,7 @@ public class Main {
                     personalTests(in, ec);
                     break;
                 case SCHEDULE:
-                    schedule(in, ec);
+                    //schedule(in, ec);
                     break;
                 case SUPERPROFESSOR:
                     superProfessor(in, ec);
@@ -393,8 +400,18 @@ public class Main {
             System.out.printf(HEADER_LIST_COURSEDEADLINES, course);
             while (it.hasNext()) {
                 Project p = it.next();
-                System.out.printf(AVAILABLE_COURSEDEADLINE, p.getName(), p.getYear(),
-                        p.getMonth(), p.getDay());
+                int year = p.getYear();
+                int month = p.getMonth();
+                int day = p.getDay();
+                String projectName = p.getName();
+
+                // Definir o formato da data
+                DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern(WRITE_DATE_FORMAT);
+
+                LocalDate testDate = LocalDate.of(year, month, day);
+
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern(WRITE_TIME_FORMAT);
+                System.out.printf(WRITE_C_DEADLINE_MSG, projectName, formatterDate.format(testDate));
             }
         }
     }
@@ -411,8 +428,19 @@ public class Main {
             System.out.printf(HEADER_LIST_PERSONALDEADLINES, name);
             while (it.hasNext()) {
                 Project p = it.next();
-                System.out.printf(AVAILABLE_PERSONALDEADLINE, p.getCourseName(), p.getName(),
-                        p.getYear(), p.getMonth(), p.getDay());
+                int year = p.getYear();
+                int month = p.getMonth();
+                int day = p.getDay();
+                String courseName = p.getCourseName();
+                String projectName = p.getName();
+
+                // Definir o formato da data
+                DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern(WRITE_DATE_FORMAT);
+
+                LocalDate testDate = LocalDate.of(year, month, day);
+
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern(WRITE_TIME_FORMAT);
+                System.out.printf(WRITE_P_DEADLINE_MSG, courseName, formatterDate.format(testDate), projectName);
             }
         }
     }
@@ -445,13 +473,28 @@ public class Main {
             System.out.printf(HEADER_LIST_COURSETESTS, course);
             while (it.hasNext()) {
                 Test t = it.next();
-                System.out.printf(AVAILABLE_TESTS, t.getYear(), t.getMonth(),
-                        t.getDay(), t.);
+                int year = t.getYear();
+                int month = t.getMonth();
+                int day = t.getDay();
+                int hour = t.getHour();
+                int minute = t.getMinute();
+                int duration = t.getDuration();
+                String testName = t.getName();
+
+                // Definir o formato da data
+                DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern(WRITE_DATE_FORMAT);
+
+                LocalDate testDate = LocalDate.of(year, month, day);
+                LocalTime startTime = LocalTime.of(hour, minute);
+                LocalTime endTime = startTime.plusHours(duration);
+
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern(WRITE_TIME_FORMAT);
+                System.out.printf(WRITE_C_TEST_MSG, formatterDate.format(testDate),
+                        formatterTime.format(startTime), formatterTime.format(endTime), testName);
             }
         }
     }
 
-    //falta acabar (time)
     private static void personalTests(Scanner in, EvaluationCalendar ec) {
         String name = in.nextLine().trim();
         Student student = (Student) ec.getPerson(name);
@@ -464,27 +507,45 @@ public class Main {
             System.out.printf(HEADER_LIST_PERSONALTESTS, name);
             while (it.hasNext()) {
                 Test t = it.next();
-                System.out.printf(AVAILABLE_PERSONALTESTS, p.getYear(), p.getMonth(), p.getDay()
-                );
+                int year = t.getYear();
+                int month = t.getMonth();
+                int day = t.getDay();
+                int hour = t.getHour();
+                int minute = t.getMinute();
+                int duration = t.getDuration();
+                String courseName = t.getCourseName();
+                String testName = t.getName();
+
+                // Definir o formato da data
+                DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern(WRITE_DATE_FORMAT);
+
+                LocalDate testDate = LocalDate.of(year, month, day);
+                LocalTime startTime = LocalTime.of(hour, minute);
+                LocalTime endTime = startTime.plusHours(duration);
+
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern(WRITE_TIME_FORMAT);
+                System.out.printf(WRITE_P_TEST_MSG, formatterDate.format(testDate),
+                        formatterTime.format(startTime), formatterTime.format(endTime),
+                        courseName, testName);
             }
         }
     }
 
-    private static void schedule(Scanner in, EvaluationCalendar ec) {
-        int year = in.nextInt();
-        int month = in.nextInt();
-        int day = in.nextInt();
-        int hour = in.nextInt();
-        int minute = in.nextInt();
-        int duration = in.nextInt();
-        String course = in.nextLine().trim();
-        String name = in.nextLine().trim();
-        if (!ec.courseExists(course)) {
-            System.out.printf(COURSE_DOESNT_EXIST, course);
-        } else if(ec.getCourseByName(course).hasTest(name)){
-            System.out.printf(TEST_EXISTS, course, name);
-        } else if(ec.getCourseByName(course).)
-    }
+//    private static void schedule(Scanner in, EvaluationCalendar ec) {
+//        int year = in.nextInt();
+//        int month = in.nextInt();
+//        int day = in.nextInt();
+//        int hour = in.nextInt();
+//        int minute = in.nextInt();
+//        int duration = in.nextInt();
+//        String course = in.nextLine().trim();
+//        String name = in.nextLine().trim();
+//        if (!ec.courseExists(course)) {
+//            System.out.printf(COURSE_DOESNT_EXIST, course);
+//        } else if(ec.getCourseByName(course).hasTest(name)){
+//            System.out.printf(TEST_EXISTS, course, name);
+//        } else if(ec.getCourseByName(course).)
+//    }
 
     private static void superProfessor(Scanner in, EvaluationCalendar ec) {
         if(ec.noProfessors()){

@@ -7,10 +7,14 @@ import dataStructures.*;
 import Course.*;
 import evaluation.Project;
 
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
 
+/**
+ * Interface that implements the methods for all <code>Person</code> objects
+ */
 public interface Person {
     /**
-     * Add course to the Array
+     * Add course to the array
      */
     void addCourse(Course c);
 
@@ -36,5 +40,9 @@ public interface Person {
      */
     int numberOfCourses();
 
+    /**
+     * Get an array with all the evaluations of a student
+     * @return an array with all the evaluations
+     */
     Iterator<Project> personalProjectsIterator();
 }

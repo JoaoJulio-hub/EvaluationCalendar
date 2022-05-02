@@ -1,13 +1,12 @@
 package evaluationCalendar;
-
 import Course.*;
 import Person.*;
 import dataStructures.*;
 import evaluation.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
 
 public class EvaluationCalendarClass implements EvaluationCalendar {
 
@@ -96,7 +95,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
 
     @Override
     public boolean deadlineExists(String projectName) {
-        return co;
+        return false;
     }
 
     @Override

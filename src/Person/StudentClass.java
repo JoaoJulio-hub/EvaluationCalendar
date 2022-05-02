@@ -1,13 +1,13 @@
-/**
- * Student class
- * Created by Joao Julio && Rodrigo Freitas
- */
 package Person;
-
 import Course.*;
 import dataStructures.*;
 import evaluation.*;
 
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
+
+/**
+ * Creates a Student object
+ */
 public class StudentClass extends AbstractPerson implements Student  {
 
     /**
@@ -24,11 +24,11 @@ public class StudentClass extends AbstractPerson implements Student  {
         super(name);
         this.id = id;
     }
+/**
+ * Get an array with all the evaluations of a student (used in the array class)
+ * @return an array with all the evaluations
+ */
 
-    /**
-     * Get an array with all the evaluations of a student (used in the array class)
-     * @return an array with all the evaluations
-     */
     private Array<Evaluation> getEvaluations() {
         Array<Evaluation> evaluations = new ArrayClass<Evaluation>();
         Iterator<Course> itCourse = coursesIterator();
@@ -43,10 +43,7 @@ public class StudentClass extends AbstractPerson implements Student  {
         return evaluations;
     }
 
-    /**
-     * Get a sorted iterator with all the tests of a student (falta fazer o compareTo)
-     * @return sorted iterator with all the tests
-     */
+
     @Override
     public Iterator<Test> personalTestIterator() {
         Array<Test> tests = new ArrayClass<Test>();
@@ -65,28 +62,16 @@ public class StudentClass extends AbstractPerson implements Student  {
         return tests.iterator();
     }
 
-
-
     @Override
     public int getId() {
         return id;
     }
 
-    /**
-     * Get number of straight days with evaluations
-     *
-     * @return number of days
-     */
     @Override
     public int getStraightDays() {
         return new Stress(getEvaluations()).getStraightDays();
     }
 
-    /**
-     * Get number of evaluations during those straight days
-     *
-     * @return number of evaluations
-     */
     @Override
     public int getNumberOfEvaluations() {
         return new Stress(getEvaluations()).getNumberEvaluations();

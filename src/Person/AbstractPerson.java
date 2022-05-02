@@ -6,9 +6,10 @@ import evaluation.Project;
 
 import java.util.Objects;
 
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
+
 /**
- * Abstract class for person
- * Created by Joao Julio && Rodrigo Freitas
+ * Implements common methods for all types of people (Student, Professor, etc...)
  */
 public abstract class AbstractPerson implements Person{
 
@@ -18,9 +19,10 @@ public abstract class AbstractPerson implements Person{
     private String name;
 
     /**
-     * Array containing every course a person is participating in
+     * Array containing every course a person is enrolled
      */
     private ArrayClass<Course> courses;
+
     /**
      * Constructor
      * @param name
@@ -42,11 +44,7 @@ public abstract class AbstractPerson implements Person{
         return Objects.equals(name, other.getName());
     }
 
-    /**
-     * Add course to the Array
-     *
-     * @param c
-     */
+
     @Override
     public void addCourse(Course c) {
         courses.insertLast(c);
@@ -87,10 +85,6 @@ public abstract class AbstractPerson implements Person{
         return courses.size();
     }
 
-    /**
-     * Get an array with all the evaluations of a student (falta fazer o compareTo)
-     * @return an array with all the evaluations
-     */
     @Override
     public Iterator<Project> personalProjectsIterator() {
         Array<Project> projects = new ArrayClass<Project>();
@@ -108,5 +102,6 @@ public abstract class AbstractPerson implements Person{
         projects.sort();
         return projects.iterator();
     }
+
 }
 

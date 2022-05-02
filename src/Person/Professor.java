@@ -4,6 +4,10 @@
  */
 package Person;
 
+/**
+ * "Tag" interface - only used to identify an object as a Professor
+ */
+
 public interface Professor extends Person{
 
     int getNumberOfStudents();

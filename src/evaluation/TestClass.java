@@ -1,9 +1,7 @@
-/**
- * Class that implements the test interface
- * Created by Joao Julio && Rodrigo Freitas
- */
 package evaluation;
 import java.time.*;
+
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
 
 public class TestClass extends AbstractEvaluation implements Test {
     /**
@@ -31,13 +29,23 @@ public class TestClass extends AbstractEvaluation implements Test {
     }
 
     @Override
-    public LocalTime getStartingHour() {
-        return LocalTime.of(hour, minute);
+    public int getHour() {
+        return hour;
     }
 
     @Override
-    public LocalTime getEndingHour() {
-        return getStartingHour().plusHours(duration);
+    public int getMinute() {
+        return minute;
+    }
+
+    @Override
+    public int getDuration() {
+        return duration;
+    }
+
+    @Override
+    public LocalTime getStartingHour() {
+        return LocalTime.of(hour, minute);
     }
 
     @Override

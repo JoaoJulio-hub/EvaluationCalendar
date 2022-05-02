@@ -1,9 +1,7 @@
-/**
- * Class that implements the project interface
- * Created by Joao Julio && Rodrigo Freitas
- */
 package evaluation;
 import java.time.LocalDate;
+
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
 
 public class ProjectClass extends AbstractEvaluation implements Project {
 

@@ -4,6 +4,8 @@ import dataStructures.*;
 import evaluation.*;
 import java.time.*;
 
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
+
 /**
  * Course is a set of <code>Person</code>, <code>Evaluation</code>. The person array <code>Person</code> will
  * have both students and professors and the set <code>Evaluation</code> will have tests and project

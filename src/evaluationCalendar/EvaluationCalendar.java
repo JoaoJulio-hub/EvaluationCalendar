@@ -1,12 +1,12 @@
 package evaluationCalendar;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import dataStructures.*;
 import Person.*;
 import Course.*;
 import evaluation.*;
+
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
 
 public interface EvaluationCalendar {
 

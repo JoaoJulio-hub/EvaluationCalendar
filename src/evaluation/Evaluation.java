@@ -1,9 +1,11 @@
-/**
- * The interface for the evaluations
- * Created by Joao Julio && Rodrigo Freitas
- */
 package evaluation;
 import java.time.LocalDate;
+
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
+
+/**
+ * Interface that implements the methods for all <code>Evaluation</code> objects
+ */
 public interface Evaluation {
 
     /**

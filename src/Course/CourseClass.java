@@ -4,6 +4,8 @@ import evaluation.*;
 import dataStructures.*;
 import java.util.Objects;
 
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
+
 /**
  * Creates a Course with a given name
  */

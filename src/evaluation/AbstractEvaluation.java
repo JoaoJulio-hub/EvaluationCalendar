@@ -1,17 +1,14 @@
-/**
- * Abstract Class for any evaluation
- * Created by Joao Julio && Rodrigo Freitas
- */
 package evaluation;
 import Course.Course;
 
 import java.time.*;
 import java.util.Objects;
 
-public abstract class AbstractEvaluation implements Evaluation{
+// Created by Joao Julio (61610) && Rodrigo Freitas (62942)
+public abstract class AbstractEvaluation implements Evaluation {
 
     /**
-     * Constants
+     * Instance Variables
      */
     private final int year, month, day;
     private final String courseName, name;
@@ -44,31 +41,16 @@ public abstract class AbstractEvaluation implements Evaluation{
         return Objects.equals(name, other.getName());
     }
 
-    /**
-     * Method to get the year of an evaluation
-     *
-     * @return the year of the evaluation
-     */
     @Override
     public int getYear() {
         return year;
     }
 
-    /**
-     * Method to get the month of an evaluation
-     *
-     * @return the month of the evaluation
-     */
     @Override
     public int getMonth() {
         return month;
     }
 
-    /**
-     * Method to get the day of an evaluation
-     *
-     * @return the day of the evaluation
-     */
     @Override
     public int getDay() {
         return day;
@@ -84,11 +66,6 @@ public abstract class AbstractEvaluation implements Evaluation{
         return name;
     }
 
-    /**
-     * Method to get the name of the course associated with the evaluation
-     *
-     * @return the name of the course
-     */
     @Override
     public String getCourseName() {
         return courseName;
