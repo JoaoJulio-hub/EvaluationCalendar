@@ -135,11 +135,6 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
     }
 
     @Override
-    public String superProfessor() {
-        return null;
-    }
-
-    @Override
     public void addProfessor(String name) {
         people.insertLast(new ProfessorClass(name));
     }
@@ -223,7 +218,7 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
         Iterator<Person> it = people.iterator();
         while (it.hasNext()) {
             Person p = it.next();
-            if (p instanceof Professor) {
+            if (p instanceof Student && p.getNumberOfEvaluations() > 0) {
                 tmp.insertLast((Student) p);
             }
         }
@@ -246,5 +241,53 @@ public class EvaluationCalendarClass implements EvaluationCalendar {
             }
         }
         return persons;
+    }
+
+    public Professor superProfessor(){
+        Iterator<Person> it = people.iterator();
+        int maxStudents = 0;
+        Professor superProfessor = null;
+        while(it.hasNext()){
+            int currentStudents = 0;
+            Person p = it.next();
+            if (p instanceof Professor){
+                Iterator <Course> courseIterator = p.coursesIterator();
+                while(courseIterator.hasNext()){
+                    Course c = courseIterator.next();
+                    currentStudents += c.getNumberStudents();
+                }
+                if(currentStudents > maxStudents){
+                    maxStudents = currentStudents;
+                    superProfessor = (Professor) p;
+                }
+            }
+        }
+        return superProfessor;
+    }
+
+    @Override
+    public boolean noProfessors(){
+        Iterator<Person> it = people.iterator();
+        int professorsCounter = 0;
+        while(it.hasNext()){
+            Person p = it.next();
+            if(p instanceof Professor){
+                professorsCounter++;
+            }
+        }
+        return professorsCounter == 0;
+    }
+
+    @Override
+    public int numberOfStudentsWithEvaluation(){
+        int counter = 0;
+        Iterator<Person> it = people.iterator();
+        while (it.hasNext()) {
+            Person p = it.next();
+            if (p instanceof Student && p.getNumberOfEvaluations() > 0) {
+                counter++;
+            }
+        }
+        return counter;
     }
 }

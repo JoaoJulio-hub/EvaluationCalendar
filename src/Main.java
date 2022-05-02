@@ -4,12 +4,20 @@ import evaluation.*;
 import evaluationCalendar.*;
 import dataStructures.*;
 import Person.*;
-
 import java.awt.*;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
+
+    /**
+     * Date and time formatting
+     */
+    private static final String WRITE_DATE_FORMAT = "dd-MM-yyyy";
+    private static final String WRITE_TIME_FORMAT = "HH'h'mm";
+    private static final String WRITE_DEADLINE_MSG = "The deadline for %s is %s.\n";
+    private static final String WRITE_TEST_MSG = "%s is scheduled for %s %s-%s.\n";
+
 
     /**
      * User commands.
@@ -70,11 +78,13 @@ public class Main {
     private static final String EMPTY_INTERSECTION = "No professors or students to list!\n";
     private static final String INADEQUATE_NUMBER_OF_COURSES = "Inadequate number of courses!";
     private static final String HEADER_LIST_COURSEDEADLINES = "Deadlines for course %s:\n";
-    private static final String AVAILABLE_DEADLINE = "%s: %d-%d-%d\n";
+    private static final String AVAILABLE_COURSEDEADLINE = "%s: %d-%d-%d\n";
+    private static final String AVAILABLE_PERSONALDEADLINE = "[%s] %s: %d-%d-%d\n";
     private static final String NO_COURSEDEADLINES = "No deadlines defined for %s!\n";
     private static final String HEADER_LIST_PERSONALDEADLINES = "Deadlines for %s:\n";
     private static final String NO_PERSONALDEADLINES = "No deadlines defined for %s!\n";
     private static final String DEADLINE_ADDED = "Deadline %s added to %s.\n";
+    private static final String DEADLINE_EXISTS = "Deadline %s already exists!\n";
     private static final String HEADER_LIST_COURSETESTS = "Tests for course %s:\n";
     private static final String AVAILABLE_TESTS = "%d-%d-%d %dh%d-%dh%d: %s\n";
     private static final String NO_COURSETESTS = "No scheduled tests for %s!\n";
@@ -88,11 +98,11 @@ public class Main {
     private static final String TEST_EXISTS = "Course %s already has a test named %s!\n";
     private static final String INVALID_TEST_TIME = "Cannot schedule test %s at that time!\n";
     private static final String LIST_SUPERPROFESSOR = "%s (%d).\n";
-    private static final String NO_PROFESSORS = "There are no professors!";
-    private static final String HEADER_LIST_STRESSOMETER = "Most stressed students:";
+    private static final String NO_PROFESSORS = "There are no professors!\n";
+    private static final String HEADER_LIST_STRESSOMETER = "Most stressed students:\n";
     private static final String MOST_STRESSED = "%d %s (%d days, %d evaluations)\n";
-    private static final String NO_STRESSED_STUDENTS = "There are no stressed students right now!";
-    private static final String INVALID_NUMBER = "Invalid number of students!";
+    private static final String NO_STRESSED_STUDENTS = "There are no stressed students right now!\n";
+    private static final String INVALID_NUMBER = "Invalid number of students!\n";
 
     /**
      * Main program. Calls the commands interpreter
@@ -140,13 +150,29 @@ public class Main {
                     intersection(in, ec);
                     break;
                 case COURSEDEADLINES:
+                    courseDeadlines(in, ec);
+                    break;
                 case PERSONALDEADLINES:
+                    personalDeadlines(in, ec);
+                    break;
                 case DEADLINE:
+                    deadline(in, ec);
+                    break;
                 case COURSETESTS:
+                    courseTests(in, ec);
+                    break;
                 case PERSONALTESTS:
+                    personalTests(in, ec);
+                    break;
                 case SCHEDULE:
+                    schedule(in, ec);
+                    break;
                 case SUPERPROFESSOR:
+                    superProfessor(in, ec);
+                    break;
                 case STRESSOMETER:
+                    stressometer(in, ec);
+                    break;
                 case HELP:
 
 
@@ -356,29 +382,131 @@ public class Main {
         }
     }
 
-    private static void courseDeadlines(Scanner in, EvaluationCalendar ec){
+    private static void courseDeadlines(Scanner in, EvaluationCalendar ec) {
         String course = in.nextLine().trim();
-        if(!ec.courseExists(course)){
+        if (!ec.courseExists(course)) {
             System.out.printf(COURSE_DOESNT_EXIST, course);
-        } else if(ec.getCourseByName(course).getNumberProjects() == 0) {
+        } else if (ec.getCourseByName(course).getNumberProjects() == 0) {
             System.out.printf(NO_COURSEDEADLINES, course);
         } else {
             Iterator<Project> it = ec.courseDeadlines(course);
             System.out.printf(HEADER_LIST_COURSEDEADLINES, course);
             while (it.hasNext()) {
-                 Project p = it.next();
-                System.out.printf(AVAILABLE_DEADLINE, p.getName(), p.getYear(),
+                Project p = it.next();
+                System.out.printf(AVAILABLE_COURSEDEADLINE, p.getName(), p.getYear(),
                         p.getMonth(), p.getDay());
             }
         }
     }
 
-    private static void stress(Scanner in, EvaluationCalendar ec) {
-        int n = in.nextInt();
-        Iterator<Person> it = ec.mostStressedStudents();
-        int i = 0;
-        while (it.hasNext() && i != n) {
-            System.out.println(it.next());
+
+    private static void personalDeadlines(Scanner in, EvaluationCalendar ec) {
+        String name = in.nextLine().trim();
+        if (!ec.personExists(name)) {
+            System.out.printf(PERSON_DOESNT_EXIST, name);
+        } else if (ec.getPerson(name).deadlineIsEmpty()) {
+            System.out.printf(NO_PERSONALDEADLINES, name);
+        } else {
+            Iterator<Project> it = ec.personalDeadlines(name);
+            System.out.printf(HEADER_LIST_PERSONALDEADLINES, name);
+            while (it.hasNext()) {
+                Project p = it.next();
+                System.out.printf(AVAILABLE_PERSONALDEADLINE, p.getCourseName(), p.getName(),
+                        p.getYear(), p.getMonth(), p.getDay());
+            }
+        }
+    }
+
+    private static void deadline(Scanner in, EvaluationCalendar ec) {
+        String course = in.nextLine().trim();
+        int year = in.nextInt();
+        int month = in.nextInt();
+        int day = in.nextInt();
+        String name = in.nextLine().trim();
+        if (!ec.courseExists(course)) {
+            System.out.printf(COURSE_DOESNT_EXIST, course);
+        } else if (ec.deadlineExists(name)) {
+            System.out.printf(DEADLINE_EXISTS, name);
+        } else {
+            ec.newDeadline(course, year, month, day, name);
+            System.out.printf(DEADLINE_ADDED, name, course);
+        }
+    }
+
+    //falta acabar (time)
+    private static void courseTests(Scanner in, EvaluationCalendar ec) {
+        String course = in.nextLine().trim();
+        if (!ec.courseExists(course)) {
+            System.out.printf(COURSE_DOESNT_EXIST, course);
+        } else if (ec.getCourseByName(course).getNumberTests() == 0) {
+            System.out.printf(NO_COURSETESTS, course);
+        } else {
+            Iterator<Test> it = ec.courseTests(course);
+            System.out.printf(HEADER_LIST_COURSETESTS, course);
+            while (it.hasNext()) {
+                Test t = it.next();
+                System.out.printf(AVAILABLE_TESTS, t.getYear(), t.getMonth(),
+                        t.getDay(), t.);
+            }
+        }
+    }
+
+    //falta acabar (time)
+    private static void personalTests(Scanner in, EvaluationCalendar ec) {
+        String name = in.nextLine().trim();
+        Student student = (Student) ec.getPerson(name);
+        if (!ec.personExists(name)) {
+            System.out.printf(STUDENT_DOESNT_EXIST, name);
+        } else if ((student.testsIsEmpty())) {
+            System.out.printf(NO_PERSONALTESTS, name);
+        } else {
+            Iterator<Test> it = ec.personalTests(name);
+            System.out.printf(HEADER_LIST_PERSONALTESTS, name);
+            while (it.hasNext()) {
+                Test t = it.next();
+                System.out.printf(AVAILABLE_PERSONALTESTS, p.getYear(), p.getMonth(), p.getDay()
+                );
+            }
+        }
+    }
+
+    private static void schedule(Scanner in, EvaluationCalendar ec) {
+        int year = in.nextInt();
+        int month = in.nextInt();
+        int day = in.nextInt();
+        int hour = in.nextInt();
+        int minute = in.nextInt();
+        int duration = in.nextInt();
+        String course = in.nextLine().trim();
+        String name = in.nextLine().trim();
+        if (!ec.courseExists(course)) {
+            System.out.printf(COURSE_DOESNT_EXIST, course);
+        } else if(ec.getCourseByName(course).hasTest(name)){
+            System.out.printf(TEST_EXISTS, course, name);
+        } else if(ec.getCourseByName(course).)
+    }
+
+    private static void superProfessor(Scanner in, EvaluationCalendar ec) {
+        if(ec.noProfessors()){
+            System.out.printf(NO_PROFESSORS);
+        } else {
+            System.out.printf(LIST_SUPERPROFESSOR, ec.superProfessor(), ec.superProfessor().getNumberOfStudents());
+        }
+    }
+
+    private static void stressometer(Scanner in, EvaluationCalendar ec) {
+        int numberOfStudents = in.nextInt();
+        if (numberOfStudents < 1) {
+            System.out.printf(INVALID_NUMBER);
+        } else if (ec.numberOfStudentsWithEvaluation() == 0) {
+            System.out.printf(NO_STRESSED_STUDENTS);
+        } else {
+            Iterator<Student> it = ec.mostStressedStudents();
+            System.out.printf(HEADER_LIST_STRESSOMETER);
+            while (it.hasNext()) {
+                Student s = it.next();
+                System.out.printf(MOST_STRESSED, s.getId(), s.getName(), s.getStraightDays(), s.getNumberOfEvaluations());
+            }
         }
     }
 }

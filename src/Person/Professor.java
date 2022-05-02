@@ -6,4 +6,5 @@ package Person;
 
 public interface Professor extends Person{
 
+    int getNumberOfStudents();
 }

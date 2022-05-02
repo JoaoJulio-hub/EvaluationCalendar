@@ -123,6 +123,13 @@ public class CourseClass implements Course{
         return people.searchForward(new ProfessorClass(name));
     }
 
+    @Override
+    public boolean hasTest(String name){
+        int pos = evaluations.searchIndexOf(new ProjectClass(0, 0, 0, null, name));
+        return (evaluations.searchForward(new ProjectClass(0,0,0, null, name))
+                    && evaluations.get(pos) instanceof Test);
+    }
+
     public Person getPerson(String name) {
         int pos = people.searchIndexOf(new ProfessorClass(name));
         return people.get(pos);
@@ -146,6 +153,11 @@ public class CourseClass implements Course{
     @Override
     public boolean hasStudent(String name) {
         return getPerson(name) instanceof Student;
+    }
+
+    @Override
+    public int getNumberOfEvaluations(){
+        return evaluations.size();
     }
 
     /**

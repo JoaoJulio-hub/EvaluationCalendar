@@ -107,5 +107,16 @@ public class StudentClass extends AbstractPerson implements Student  {
             return this.getId() - other.getId();
         }
     }
+
+    @Override
+    public boolean testsIsEmpty() {
+        Iterator<Course> it = coursesIterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            Course c = it.next();
+            counter += c.getNumberTests();
+        }
+        return counter == 0;
+    }
 }
 

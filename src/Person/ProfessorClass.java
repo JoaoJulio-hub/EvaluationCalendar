@@ -12,6 +12,7 @@ public class ProfessorClass extends AbstractPerson implements Professor {
         super(name);
     }
 
+    @Override
     public int getNumberOfStudents() {
         int counter = 0;
         Iterator<Course> it = coursesIterator();

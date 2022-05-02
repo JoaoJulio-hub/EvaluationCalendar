@@ -65,6 +65,8 @@ public interface Course {
 
     boolean hasPerson(String name);
 
+    boolean hasTest(String name);
+
     /**
      * Check if a professor with a given name exists
      * @param name
@@ -78,6 +80,8 @@ public interface Course {
      * @return true if the student exists, false otherwise
      */
     boolean hasStudent(String name);
+
+    int getNumberOfEvaluations();
 
     /**
      * Get number of scheduled tests

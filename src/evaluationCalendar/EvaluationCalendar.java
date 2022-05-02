@@ -161,11 +161,6 @@ public interface EvaluationCalendar {
     int studentsWithTimeConflict(LocalDateTime time);
 
     /**
-     * Returns the professor with the most students
-     */
-    String superProfessor();
-
-    /**
      * Adds a professor to the system
      *
      * @param name
@@ -312,4 +307,13 @@ public interface EvaluationCalendar {
     Iterator<Student> mostStressedStudents();
 
     Array<Person> multiIntersectCourses(Array<Person> persons);
+
+    /**
+     * Returns the professor with the most students
+     */
+    Professor superProfessor();
+
+    boolean noProfessors();
+
+    int numberOfStudentsWithEvaluation();
 }

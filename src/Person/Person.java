@@ -14,6 +14,10 @@ public interface Person {
      */
     void addCourse(Course c);
 
+    int getNumberOfEvaluations();
+
+    boolean deadlineIsEmpty();
+
     /**
      * Returns person name
      * @return - person name

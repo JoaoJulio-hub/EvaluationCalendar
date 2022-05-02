@@ -4,6 +4,8 @@ import Course.Course;
 import evaluation.Evaluation;
 import evaluation.Project;
 
+import java.util.Objects;
+
 /**
  * Abstract class for person
  * Created by Joao Julio && Rodrigo Freitas
@@ -27,6 +29,19 @@ public abstract class AbstractPerson implements Person{
         this.name = name;
         this.courses = new ArrayClass<Course>();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Person))
+            return false;
+        Person other = (Person) obj;
+        return Objects.equals(name, other.getName());
+    }
+
     /**
      * Add course to the Array
      *
@@ -37,7 +52,25 @@ public abstract class AbstractPerson implements Person{
         courses.insertLast(c);
     }
 
+    @Override
+    public int getNumberOfEvaluations(){
+        int counter = 0;
+        Iterator<Course> it = coursesIterator();
+        while(it.hasNext()){
+            Course c = it.next();
+            counter += c.getNumberOfEvaluations();
+        }
+        return counter;
+    }
 
+    @Override
+    public boolean deadlineIsEmpty(){
+        int projects = 0;
+        for(int i = 0; i < courses.size(); i++){
+            projects += courses.get(i).getNumberProjects();
+        }
+        return projects == 0;
+    }
 
     @Override
     public String getName(){

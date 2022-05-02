@@ -28,4 +28,6 @@ public interface Student extends Person, Comparable<Student> {
      * @return number of evaluations
      */
     int getNumberOfEvaluations();
+
+    boolean testsIsEmpty();
 }

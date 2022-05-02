@@ -3,7 +3,10 @@
  * Created by Joao Julio && Rodrigo Freitas
  */
 package evaluation;
+import Course.Course;
+
 import java.time.*;
+import java.util.Objects;
 
 public abstract class AbstractEvaluation implements Evaluation{
 
@@ -27,6 +30,18 @@ public abstract class AbstractEvaluation implements Evaluation{
         this.month = month;
         this.day = day;
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Evaluation))
+            return false;
+        Evaluation other = (Evaluation) obj;
+        return Objects.equals(name, other.getName());
     }
 
     /**
